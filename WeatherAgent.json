@@ -1,0 +1,175 @@
+{
+  "name": "WeatherAgent",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -460,
+        -100
+      ],
+      "id": "25b00eac-621d-4bb7-9a5b-28de75354553",
+      "name": "When chat message received",
+      "webhookId": "46035cf0-9bd2-4750-b9bd-940626ceaea5"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a helpful assistant"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        -240,
+        -100
+      ],
+      "id": "50282239-a85f-44d8-8287-019478342eb7",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -320,
+        100
+      ],
+      "id": "eb0520bc-6973-4ff7-9574-6843a7cab076",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "JzCwX2SIO7tfaW4Y",
+          "name": "Groq account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "take from previous nodes automatically"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -200,
+        100
+      ],
+      "id": "94e14390-9b35-4b82-9611-b7a9cee7e50a",
+      "name": "Window Buffer Memory"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolWikipedia",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        120
+      ],
+      "id": "1883625d-137f-4e5b-8365-c83249d8e8c9",
+      "name": "Wikipedia"
+    },
+    {
+      "parameters": {
+        "name": "weather",
+        "description": "call this tool to access currect weather information. ",
+        "workflowId": {
+          "__rl": true,
+          "value": "mEHBjLfRMzyV3x5K",
+          "mode": "list",
+          "cachedResultName": "TANUJ-AUTOMATION-PROJECTS-RAG-AGENT — weather"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2,
+      "position": [
+        60,
+        60
+      ],
+      "id": "b69ebaea-1233-4583-aeff-63722ae3e84a",
+      "name": "Call n8n Workflow Tool"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wikipedia": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call n8n Workflow Tool": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "fb988ef6-98e3-413c-ae99-60c6246d0e06",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "32b2bcd670e5aa404bc0dd88d2ab53b50f284e206b121388c6ee06c44f2c730d"
+  },
+  "id": "0anZmvwDov7Ve7e2",
+  "tags": []
+}
