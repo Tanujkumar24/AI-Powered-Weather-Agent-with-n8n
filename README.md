@@ -48,6 +48,8 @@ This project implements an AI-powered weather agent using **n8n**, an automation
 | **Memory Buffer** | Maintains conversation context |
 
 ---
+![Workflow Overview](https://github.com/Tanujkumar24/AI-Powered-Weather-Agent-with-n8n/blob/main/weather-agent-flow-start.png)
+![Workflow Overview](https://github.com/Tanujkumar24/AI-Powered-Weather-Agent-with-n8n/blob/main/weather-agent-flow-end.png)
 
 ## Installation & Setup
 
